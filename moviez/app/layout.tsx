@@ -1,4 +1,5 @@
-import "../globals.css";
+import Footer from "./components/footer";
+import Header from "./components/header";
 
 export const metadata = {
   title: "MOVIEZ",
@@ -10,9 +11,9 @@ export default function Layout() {
   return (
     <html lang="en">
       <body>
-        <p>Header</p>
+        <Header />
         <main>Main</main>
-        <p>Footer</p>
+        <Footer />
       </body>
     </html>
   );
