@@ -7,12 +7,12 @@ export const metadata = {
   description: "A movie database built with Next.js",
 };
 
-export default function Layout() {
+export default function Layout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en">
       <body>
         <Header />
-        <main>Main</main>
+        <main>{children}</main>
         <Footer />
       </body>
     </html>
