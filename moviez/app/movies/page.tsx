@@ -1,4 +1,17 @@
 import Image from "next/image";
+import Link from "next/link";
+
+// Style and Layout Ideas //
+
+// Style a movie carosel on top
+// Show popular movies
+// Shadows
+// Gradients
+
+// have movies float when hovered over
+// Nintendo Wii UI style
+// Search Bar
+// Sort movies by genre on top
 
 type Movie = {
   id: number;
@@ -26,27 +39,29 @@ async function getPopularMovies(): Promise<Movie[]> {
 
 export default async function Movies() {
   const movies = await getPopularMovies();
+  console.log("Movies:", movies); // Log the movies data to the console
 
   return (
     <>
-      <div className="">Test</div>
-      <div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
         {movies.map((movie) => (
           <div key={movie.id}>
-            {movie.poster_path ? (
-              <Image
-                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt={`${movie.title} poster`}
-                width={200}
-                height={300}
-                loading="eager"
-              />
-            ) : (
-              <div />
-            )}
-            <p>
-              {movie.title} ({movie.release_date?.slice(0, 4)})
-            </p>
+            <Link href={`/movies/${movie.id}`}>
+              {movie.poster_path ? (
+                <Image
+                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  alt={`${movie.title} poster`}
+                  width={200}
+                  height={300}
+                  loading="eager"
+                />
+              ) : (
+                <div />
+              )}
+              <p>
+                {movie.title} ({movie.release_date?.slice(0, 4)})
+              </p>
+            </Link>
           </div>
         ))}
       </div>
