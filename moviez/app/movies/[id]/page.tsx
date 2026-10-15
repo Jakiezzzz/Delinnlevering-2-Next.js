@@ -1,11 +1,5 @@
 import Link from "next/link";
 
-// Style and Layout Ideas
-// Style a movie carosel on top
-// Show popular movies
-
-// have movies float when hovered over
-
 type MovieProps = {
   params: Promise<{ id: string }>;
 };
@@ -25,7 +19,6 @@ export default async function MovieDetails({ params }: MovieProps) {
   }
 
   const movie = await response.json();
-  console.log("Movie Details:", movie);
   return (
     <div>
       <Link href="/movies">Go Back</Link>

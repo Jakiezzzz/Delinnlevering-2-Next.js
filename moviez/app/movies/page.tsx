@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import SearchBar from "../components/searchBar";
 
 // Style and Layout Ideas //
 
@@ -20,29 +21,85 @@ type Movie = {
   poster_path: string | null;
 };
 
-async function getPopularMovies(): Promise<Movie[]> {
-  const response = await fetch("https://api.themoviedb.org/3/movie/popular", {
-    headers: {
-      Authorization: `Bearer ${process.env.TMDB_TOKEN}`,
-      accept: "application/json",
+// Definerer Genre her sammen med film.
+// Plannen var og ha det seperat først, men med å ha det samlet slipper man å rendere ting på nytt hele tiden på en seperat side
+type Genre = {
+  id: number;
+  name: string;
+};
+
+//Definerer autorisasjon her nå for at den kan bli tatt imot i flere funksjoner
+const headers = {
+  Authorization: `Bearer ${process.env.TMDB_TOKEN}`,
+  accept: "application/json",
+};
+
+//Async funksjon som henter sjangere fra tmdb
+// Revalidate
+async function getGenres(): Promise<Genre[]> {
+  const response = await fetch(
+    "https://api.themoviedb.org/3/genre/movie/list",
+    {
+      headers,
+      next: { revalidate: 86400 },
     },
-    next: { revalidate: 3600 },
-  });
+  );
+  if (!response.ok)
+    throw new Error(`Genres request failed: ${response.status}`);
+  const data = await response.json();
+  return data.genres;
+}
 
-  if (!response.ok) {
-    throw new Error(`TMDB request failed: ${response.status}`);
-  }
+//Async funkjson for å hente populære filmer. (Henter populære filmer siden det hadde vært for my å vise all filmer på en gang)
+//Genre er valgfritt og kan kjøres uten genre og bare henter populære filmer.
+//Returnerer et film array
+async function getPopularMovies(genre?: string): Promise<Movie[]> {
+  const url = genre
+    ? `https://api.themoviedb.org/3/discover/movie?with_genres=${genre}&sort_by=popularity.desc&include_adult=false`
+    : "https://api.themoviedb.org/3/movie/popular";
 
+  const response = await fetch(url, { headers, next: { revalidate: 3600 } });
+  if (!response.ok) throw new Error(`TMDB request failed: ${response.status}`);
   const data = await response.json();
   return data.results;
 }
 
-export default async function Movies() {
-  const movies = await getPopularMovies();
-  console.log("Movies:", movies); // Log the movies data to the console
+//Selve film oversikt siden som blir eksportert
+export default async function Movies({
+  searchParams,
+}: {
+  searchParams: Promise<{ genre?: string }>;
+}) {
+  const { genre } = await searchParams;
+  const [genres, movies] = await Promise.all([
+    getGenres(),
+    getPopularMovies(genre),
+  ]);
 
   return (
     <>
+      <SearchBar />
+      <div className="flex flex-wrap gap-2">
+        <Link
+          href="/movies"
+          className={`rounded-full border px-4 py-1 ${!genre ? "bg-black text-white" : ""}`}
+        >
+          All
+        </Link>
+
+        {genres.map((g) => (
+          <Link
+            key={g.id}
+            href={`/movies?genre=${g.id}`}
+            className={`rounded-full border px-4 py-1 ${
+              genre === String(g.id) ? "bg-black text-white" : ""
+            }`}
+          >
+            {g.name}
+          </Link>
+        ))}
+      </div>
+
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
         {movies.map((movie) => (
           <div key={movie.id}>
