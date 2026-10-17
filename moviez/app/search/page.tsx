@@ -1,28 +1,5 @@
-type Movie = {
-  id: number;
-  title: string;
-  release_date: string;
-  poster_path: string | null;
-};
-
-async function searchMovies(query: string): Promise<Movie[]> {
-  const response = await fetch(
-    `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(query)}&include_adult=false`,
-    {
-      headers: {
-        Authorization: `Bearer ${process.env.TMDB_TOKEN}`,
-        accept: "application/json",
-      },
-    },
-  );
-
-  if (!response.ok) {
-    throw new Error(`TMDB request failed: ${response.status}`);
-  }
-
-  const data = await response.json();
-  return data.results;
-}
+import { searchMovies } from "@/types/tmdb";
+import MovieCard from "../components/movieCard";
 
 export default async function SearchPage({
   searchParams,
@@ -38,13 +15,11 @@ export default async function SearchPage({
       <div>
         {q && movies.length === 0 && <p>No results...</p>}
 
-        <ul>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {movies.map((movie) => (
-            <li key={movie.id}>
-              {movie.title} ({movie.release_date?.slice(0, 4)})
-            </li>
+            <MovieCard key={movie.id} movie={movie} />
           ))}
-        </ul>
+        </div>
       </div>
     </>
   );
