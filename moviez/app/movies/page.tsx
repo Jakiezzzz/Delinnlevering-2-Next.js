@@ -1,16 +1,9 @@
 // Style and Layout Ideas //
 
 // Style a movie carosel on top
-// Show popular movies
-// Shadows
-// Gradients
 
 // have movies float when hovered over
-// Nintendo Wii UI style
-// Search Bar
-// Sort movies by genre on top
 
-import Image from "next/image";
 import Link from "next/link";
 import SearchBar from "../components/searchBar";
 import MovieCard from "../components/movieCard";
@@ -34,10 +27,10 @@ export default async function Movies({
   return (
     <>
       <SearchBar />
-      <div className="flex flex-wrap gap-2">
+      <div className="mt-5 flex flex-wrap gap-2.5">
         <Link
           href="/movies"
-          className={`rounded-full border px-4 py-1 ${!genre ? "bg-black text-white" : ""}`}
+          className={`rounded-full px-4 py-1.5 font-bold transition-transform hover:-translate-y-0.5 ${!genre ? "glass-pill-active" : "glass-pill"}`}
         >
           All
         </Link>
@@ -46,16 +39,14 @@ export default async function Movies({
           <Link
             key={g.id}
             href={`/movies?genre=${g.id}`}
-            className={`rounded-full border px-4 py-1 ${
-              genre === String(g.id) ? "bg-black text-white" : ""
-            }`}
+            className={`rounded-full px-4 py-1.5 font-bold transition-transform hover:-translate-y-0.5 ${genre === String(g.id) ? "glass-pill-active" : "glass-pill"}`}
           >
             {g.name}
           </Link>
         ))}
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-9 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
         {movies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
