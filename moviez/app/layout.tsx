@@ -11,9 +11,9 @@ export const metadata = {
 export default function Layout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en">
-      <body>
+      <body className="font-sans antialiased">
         <Header />
-        <main>{children}</main>
+        <main className="mx-auto max-w-6xl px-5 pb-12 pt-8">{children}</main>
         <Footer />
       </body>
     </html>

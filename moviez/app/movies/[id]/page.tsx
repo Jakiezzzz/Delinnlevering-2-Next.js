@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 type MovieProps = {
@@ -21,16 +22,31 @@ export default async function MovieDetails({ params }: MovieProps) {
   const movie = await response.json();
   return (
     <div>
-      <Link href="/movies">Go Back</Link>
-      <img
-        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-        alt={`${movie.title} poster`}
-        width={200}
-        height={300}
-      />
-      <h1>Movie Details for {movie.title}</h1>
-      <p>Release Date: {movie.release_date}</p>
-      <p>{movie.overview}</p>
+      <Link
+        href="/movies"
+        className="glass-pill inline-block rounded-full px-5 py-2 font-bold transition-transform hover:-translate-y-0.5"
+      >
+        ← Go back
+      </Link>
+
+      <div className="glass-bar mt-6 flex flex-col gap-8 rounded-3xl p-6 sm:flex-row">
+        {movie.poster_path && (
+          <Image
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+            alt={`${movie.title} poster`}
+            width={500}
+            height={750}
+            className="h-auto w-full rounded-2xl shadow-lg shadow-black/30 sm:w-72"
+          />
+        )}
+        <div>
+          <h1 className="text-3xl font-extrabold">{movie.title}</h1>
+          <p className="mt-1 font-bold text-ink-soft">
+            Release date: {movie.release_date}
+          </p>
+          <p className="mt-5 max-w-prose leading-relaxed">{movie.overview}</p>
+        </div>
+      </div>
     </div>
   );
 }
