@@ -9,3 +9,15 @@ export type Genre = {
   id: number;
   name: string;
 };
+
+export type MoviePage = {
+  results: Movie[];
+  page: number;
+  total_pages: number;
+};
+
+export type PaginationProps = {
+  page: number;
+  totalPages: number;
+  genre?: string;
+};
