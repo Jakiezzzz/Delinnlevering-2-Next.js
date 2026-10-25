@@ -7,6 +7,7 @@
 import Link from "next/link";
 import SearchBar from "../components/searchBar";
 import MovieCard from "../components/movieCard";
+import Pagination from "../components/pagination";
 
 // tmdb fetch og dems funksjoner har nå blitt lagt til en egen ts fil, på denne måten må man ikke kjøre fetch hele tiden.
 import { getPopularMovies } from "@/types/tmdb";
@@ -16,13 +17,13 @@ import { getGenres } from "@/types/tmdb";
 export default async function Movies({
   searchParams,
 }: {
-  searchParams: Promise<{ genre?: string }>;
+  searchParams: Promise<{ genre?: string; page?: string }>;
 }) {
-  const { genre } = await searchParams;
-  const [genres, movies] = await Promise.all([
-    getGenres(),
-    getPopularMovies(genre),
-  ]);
+  const { genre, page } = await searchParams;
+  const requestedPage = Number.parseInt(page ?? "1", 10) || 1;
+
+  const [genres, { results: movies, page: currentPage, total_pages }] =
+    await Promise.all([getGenres(), getPopularMovies(genre, requestedPage)]);
 
   return (
     <>
@@ -51,6 +52,8 @@ export default async function Movies({
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>
+
+      <Pagination page={currentPage} totalPages={total_pages} genre={genre} />
     </>
   );
 }
