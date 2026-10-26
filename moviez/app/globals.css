@@ -100,7 +100,7 @@
     transition-duration: 0.08s;
     transition-timing-function: linear;
   }
-  /* Redusrt motion om bruker ikke vil ha mye bevegelse */
+  /* Redusert motion om bruker ikke vil ha mye bevegelse */
   @media (prefers-reduced-motion: no-preference) {
     transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
   }
@@ -121,6 +121,7 @@
 
 /* Selve kroppen på siden */
 body {
+  @apply font-sans;
   min-height: 100vh;
   color: var(--color-ink);
   background-color: #e9edf1;
@@ -128,4 +129,18 @@ body {
     radial-gradient(1200px 600px at 50% -10%, #fff 0%, transparent 70%),
     linear-gradient(180deg, #fff 0%, #e9edf1 55%, #cfd8e0 100%);
   background-attachment: fixed;
+}
+
+h1 {
+  @apply text-3xl font-extrabold tracking-tight sm:text-4xl;
+}
+h2 {
+  @apply text-2xl font-extrabold;
+}
+h3 {
+  @apply text-xl font-bold;
+}
+
+p {
+  @apply leading-relaxed;
 }
