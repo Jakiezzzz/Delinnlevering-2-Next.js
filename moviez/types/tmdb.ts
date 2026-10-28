@@ -73,3 +73,9 @@ export async function getPopularMovies(
     total_pages: Math.min(data.total_pages, TMDB_MAX_PAGES),
   };
 }
+
+// Henter populære filmer til karusellen på forsiden
+export async function getFeaturedMovies(count = 8): Promise<Movie[]> {
+  const { results } = await getPopularMovies();
+  return results.filter((movie) => movie.backdrop_path).slice(0, count);
+}
