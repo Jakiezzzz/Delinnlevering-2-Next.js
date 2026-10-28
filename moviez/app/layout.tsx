@@ -13,7 +13,7 @@ export default function Layout({ children }: LayoutProps<"/">) {
     <html lang="en">
       <body className="font-sans antialiased">
         <Header />
-        <main className="mx-auto max-w-6xl px-5 pb-12 pt-8">{children}</main>
+        <main className="mx-auto max-w-6xl px-5 pt-4 pb-12">{children}</main>
         <Footer />
       </body>
     </html>
