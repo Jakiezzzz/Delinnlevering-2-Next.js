@@ -6,8 +6,8 @@ export default function AboutPage() {
       <h1>About us</h1>
       <p>
         Moviez is made for people who want to discover and find movies easily,
-        while also providing a unique style reminiscent of the Nintendo Wii
-        Menu.
+        while also providing a unique style reminiscent of the Nintendo Wii and
+        Playstation Vita home Menu.
       </p>
       <p>The site is created by Jakob Torgau</p>
       <p>
