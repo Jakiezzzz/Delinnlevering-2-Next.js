@@ -1,4 +1,7 @@
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = { title: "MOVIEZ - About us" };
 
 export default function AboutPage() {
   return (
@@ -17,9 +20,17 @@ export default function AboutPage() {
 
       <h2>Sources:</h2>
       <h3>TMDB for the API and for the movie carousel inspiration:</h3>
-      <Link href="https://www.themoviedb.org/">https://www.themoviedb.org</Link>
+      <Link
+        href="https://www.themoviedb.org/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        https://www.themoviedb.org
+      </Link>
       <h3>CLAUDE AI for troubleshooting and styling directions:</h3>
-      <Link href="https://claude.ai/">https://claude.ai/</Link>
+      <Link href="https://claude.ai/" target="_blank" rel="noopener noreferrer">
+        https://claude.ai/
+      </Link>
     </>
   );
 }

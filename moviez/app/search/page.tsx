@@ -1,6 +1,9 @@
 import { searchMovies } from "@/types/tmdb";
 import MovieCard from "../components/movieCard";
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = { title: "MOVIEZ - Search" };
 
 export default async function SearchPage({
   searchParams,
@@ -12,7 +15,7 @@ export default async function SearchPage({
 
   return (
     <>
-      <h1 className="text-2xl font-extrabold">
+      <h1 className="font-extrabold">
         {q ? <>Search results for &quot;{q}&quot;</> : "Search for a movie"}
       </h1>
       <Link

@@ -5,7 +5,7 @@ import TiltCard from "./tiltCard";
 
 export default function movieCard({ movie }: { movie: Movie }) {
   return (
-    <div>
+    <>
       <TiltCard>
         <Link
           href={`/movies/${movie.id}`}
@@ -37,6 +37,6 @@ export default function movieCard({ movie }: { movie: Movie }) {
           </div>
         </Link>
       </TiltCard>
-    </div>
+    </>
   );
 }

@@ -121,7 +121,6 @@
 
 /* Selve kroppen på siden */
 body {
-  @apply font-sans;
   min-height: 100vh;
   color: var(--color-ink);
   background-color: #e9edf1;

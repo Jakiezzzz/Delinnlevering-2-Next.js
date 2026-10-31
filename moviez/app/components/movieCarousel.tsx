@@ -30,8 +30,8 @@ export default function MovieCarousel({
 
   return (
     <section
-      aria-roledescription="Film Karusell"
-      aria-label="Populære filmer"
+      aria-roledescription="Movie Carousel"
+      aria-label="Featured Films"
       className="glass-tile mx-auto max-w-4xl rounded-3xl p-2.5 "
     >
       <div className="relative aspect-video overflow-hidden rounded-2xl shadow-lg shadow-black/30 lg:aspect-21/9">
@@ -43,7 +43,7 @@ export default function MovieCarousel({
             fill
             priority={i === 0}
             aria-hidden={i !== index}
-            sizes="(min-width: 1152px) 1128px, 100vw"
+            sizes="(min-width: 896px) 872px, 100vw"
             className={`object-cover transition-opacity duration-1000 motion-reduce:transition-none ${
               i === index ? "opacity-100" : "opacity-0"
             }`}
