@@ -14,7 +14,7 @@ export default async function Homepage() {
       <div className="text-center pt-3 text-xl">
         <p>
           Discover currently trending movies by visiting the{" "}
-          <Link href="/movies" className="font-extrabold cursor-pointer">
+          <Link href="/movies" className="font-extrabold">
             Movies
           </Link>{" "}
           page!

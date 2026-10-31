@@ -38,7 +38,7 @@ export default function Pagination({
 
   return (
     <nav
-      aria-label="Paginering"
+      aria-label="Pagination"
       className="mt-12 flex flex-wrap items-center justify-center gap-2.5"
     >
       {page > 1 ? (
@@ -49,7 +49,11 @@ export default function Pagination({
           ← Prev
         </Link>
       ) : (
-        <span aria-disabled="true" className={`${base} glass-pill opacity-40`}>
+        <span
+          aria-disabled="true"
+          role="link"
+          className={`${base} glass-pill opacity-40`}
+        >
           ← Prev
         </span>
       )}
@@ -79,7 +83,11 @@ export default function Pagination({
           Next →
         </Link>
       ) : (
-        <span aria-disabled="true" className={`${base} glass-pill opacity-40`}>
+        <span
+          aria-disabled="true"
+          role="link"
+          className={`${base} glass-pill opacity-40`}
+        >
           Next →
         </span>
       )}

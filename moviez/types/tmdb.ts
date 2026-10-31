@@ -42,7 +42,10 @@ export async function searchMovies(query: string): Promise<Movie[]> {
 
 //Async funkjson for å hente populære filmer.
 
-//(legg til forklaring)
+// Henter en side med filmer fra TMDB.
+// Uten sjanger hentes de mest populære filmene. Med sjanger hentes filmer
+// i den sjangeren, sortert etter popularitet.
+// Svaret caches i én time, og sidetallet holdes mellom 1 og 500.
 export async function getPopularMovies(
   genre?: string,
   page = 1,

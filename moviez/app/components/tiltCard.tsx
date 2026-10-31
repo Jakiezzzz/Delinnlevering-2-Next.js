@@ -3,11 +3,12 @@
 "use client";
 import { useRef, type ReactNode } from "react";
 
+// Hvor mye den skal lene seg
+const MAX_TILT = 14;
+
 export default function TiltCard({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const frame = useRef(0);
-  // Hvor mye den skal lene seg
-  const MAX_TILT = 14;
 
   // Beveger seg bare hvis det faktisk finnes en mus
   function onPointerMove(e: React.PointerEvent<HTMLDivElement>) {

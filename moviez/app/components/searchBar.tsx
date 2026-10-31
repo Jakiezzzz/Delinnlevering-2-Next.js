@@ -3,9 +3,10 @@ export default function SearchBar() {
     <form
       action="/search"
       className="glass-bar flex max-w-md items-center gap-2 rounded-full p-1.5 pl-5 focus-within:ring-2 focus-within:ring-aqua"
+      role="search"
     >
       <input
-        type="text"
+        type="search"
         name="q"
         placeholder="Search movies..."
         aria-label="Search movies"
